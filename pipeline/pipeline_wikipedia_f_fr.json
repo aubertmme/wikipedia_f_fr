@@ -1,0 +1,78 @@
+{
+	"name": "pipeline_wikipedia_f_fr",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_1f5",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "/sparql?format=json&query=SELECT%20?item%20?itemLabel%20(COUNT%20(?has_part_s_)%20as%20?count_has_part_s_)%20(COUNT%20(?part_of)%20as%20?count_part_of)%20WHERE%20{%20?item%20wdt:P21%20wd:Q6581072;%20wdt:P1412%20wd:Q150.%20SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20\"fr\".}%20OPTIONAL%20{%20?item%20wdt:P527%20?has_part_s_.%20}%20OPTIONAL%20{%20?item%20wdt:P361%20?part_of.%20}%20}%20GROUP%20BY%20?item%20?itemLabel"
+					},
+					{
+						"name": "Destination",
+						"value": "blobwikipediafrf//"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET",
+							"additionalHeaders": "User-Agent : AzureLearning/0.0 (https://www.aubertm.me marina@aubertm.me)",
+							"requestTimeout": ""
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 1
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings",
+							"copyBehavior": "FlattenHierarchy"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_1f5",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_1f5",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
