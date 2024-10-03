@@ -1,0 +1,33 @@
+{
+	"name": "TA_POP_MALE_2020",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageLS",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Demo/Files"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "TA_POP_MALE_2020.txt",
+				"folderPath": "Demo",
+				"container": "fedasil-blob-container"
+			},
+			"columnDelimiter": "|",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CD_REFNIS|tx_descr_nl|tx_descr_fr|TX_FST_NAME|MS_FREQUENCY",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

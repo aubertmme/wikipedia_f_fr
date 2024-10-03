@@ -1,0 +1,20 @@
+{
+	"name": "fedasil_sql_db1_aaa",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "fedasil_sql",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Exercices"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "aaa"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

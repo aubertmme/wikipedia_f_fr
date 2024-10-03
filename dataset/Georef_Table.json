@@ -1,0 +1,20 @@
+{
+	"name": "Georef_Table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "fedasil_sql",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Demo/DataBase/StagingArea"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "georef"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

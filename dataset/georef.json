@@ -1,0 +1,129 @@
+{
+	"name": "georef",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageLS",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Demo/Files"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "georef-belgium-postal-codes.csv",
+				"folderPath": "Demo",
+				"container": "fedasil-blob-container"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "geo_point_2d",
+				"type": "String"
+			},
+			{
+				"name": "geo_shape",
+				"type": "String"
+			},
+			{
+				"name": "postcode",
+				"type": "String"
+			},
+			{
+				"name": "special_code",
+				"type": "String"
+			},
+			{
+				"name": "smun_code",
+				"type": "String"
+			},
+			{
+				"name": "reg_code",
+				"type": "String"
+			},
+			{
+				"name": "prov_code",
+				"type": "String"
+			},
+			{
+				"name": "arr_code",
+				"type": "String"
+			},
+			{
+				"name": "mun_code",
+				"type": "String"
+			},
+			{
+				"name": "smun_area_code",
+				"type": "String"
+			},
+			{
+				"name": "smun_name_fr",
+				"type": "String"
+			},
+			{
+				"name": "smun_name_nl",
+				"type": "String"
+			},
+			{
+				"name": "smun_name_de",
+				"type": "String"
+			},
+			{
+				"name": "reg_name_de",
+				"type": "String"
+			},
+			{
+				"name": "reg_name_nl",
+				"type": "String"
+			},
+			{
+				"name": "reg_name_fr",
+				"type": "String"
+			},
+			{
+				"name": "prov_name_de",
+				"type": "String"
+			},
+			{
+				"name": "prov_name_nl",
+				"type": "String"
+			},
+			{
+				"name": "prov_name_fr",
+				"type": "String"
+			},
+			{
+				"name": "arr_name_de",
+				"type": "String"
+			},
+			{
+				"name": "arr_name_nl",
+				"type": "String"
+			},
+			{
+				"name": "arr_name_fr",
+				"type": "String"
+			},
+			{
+				"name": "mun_name_de",
+				"type": "String"
+			},
+			{
+				"name": "mun_name_nl",
+				"type": "String"
+			},
+			{
+				"name": "mun_name_fr",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
