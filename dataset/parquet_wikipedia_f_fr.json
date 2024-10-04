@@ -1,0 +1,19 @@
+{
+	"name": "parquet_wikipedia_f_fr",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage_fedasiladls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "blobwikipediafrf"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
