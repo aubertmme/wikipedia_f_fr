@@ -84,7 +84,8 @@
 									"type": "Int16"
 								}
 							}
-						]
+						],
+						"collectionReference": "$['head']['vars']"
 					}
 				},
 				"inputs": [
