@@ -1,5 +1,5 @@
 {
-	"name": "parquet_wikipedia_f_fr",
+	"name": "parquet_wffr",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage_fedasiladls",
