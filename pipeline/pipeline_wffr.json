@@ -44,7 +44,56 @@
 							"type": "ParquetWriteSettings"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['head']['vars'][0]"
+								},
+								"sink": {
+									"name": "items",
+									"type": "Byte"
+								}
+							},
+							{
+								"source": {
+									"path": "$['results']['bindings'][0]['item']['value']"
+								},
+								"sink": {
+									"name": "item",
+									"type": "Byte"
+								}
+							},
+							{
+								"source": {
+									"path": "$['results']['bindings'][0]['itemLabel']['value']"
+								},
+								"sink": {
+									"name": "itemLabel",
+									"type": "Byte"
+								}
+							},
+							{
+								"source": {
+									"path": "$['results']['bindings'][0]['count_has_part_s_']['value']"
+								},
+								"sink": {
+									"name": "count_has_part_s"
+								}
+							},
+							{
+								"source": {
+									"path": "$['results']['bindings'][0]['count_part_of']['value']"
+								},
+								"sink": {
+									"name": "count_part_of",
+									"type": "Int16"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
