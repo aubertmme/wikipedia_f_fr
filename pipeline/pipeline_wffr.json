@@ -24,6 +24,16 @@
 					}
 				],
 				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
 					"sink": {
 						"type": "ParquetSink",
 						"storeSettings": {
@@ -36,9 +46,15 @@
 					},
 					"enableStaging": false
 				},
+				"inputs": [
+					{
+						"referenceName": "json_wffr",
+						"type": "DatasetReference"
+					}
+				],
 				"outputs": [
 					{
-						"referenceName": "parquet_wikipedia_f_fr",
+						"referenceName": "parquet_wffr",
 						"type": "DatasetReference"
 					}
 				]
