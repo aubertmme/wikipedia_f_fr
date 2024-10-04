@@ -50,20 +50,11 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['head']['vars'][0]"
-								},
-								"sink": {
-									"name": "items",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"path": "$['results']['bindings'][0]['item']['value']"
 								},
 								"sink": {
 									"name": "item",
-									"type": "Byte"
+									"type": "String"
 								}
 							},
 							{
@@ -80,7 +71,8 @@
 									"path": "$['results']['bindings'][0]['count_has_part_s_']['value']"
 								},
 								"sink": {
-									"name": "count_has_part_s"
+									"name": "count_has_part_s",
+									"type": "Int16"
 								}
 							},
 							{
