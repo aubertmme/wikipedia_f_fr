@@ -1,9 +1,9 @@
 {
-	"name": "pipeline_wikipedia_f_fr",
+	"name": "pipeline_wffr",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_flatten_wikipedia_f_fr",
+				"name": "Copy_flatten_wffr",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -24,19 +24,6 @@
 					}
 				],
 				"typeProperties": {
-					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET",
-							"additionalHeaders": "User-Agent : AzureLearning/0.0 (https://www.aubertm.me marina@aubertm.me)",
-							"requestTimeout": ""
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings",
-							"skipLineCount": 1
-						}
-					},
 					"sink": {
 						"type": "ParquetSink",
 						"storeSettings": {
@@ -47,22 +34,8 @@
 							"type": "ParquetWriteSettings"
 						}
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
+					"enableStaging": false
 				},
-				"inputs": [
-					{
-						"referenceName": "SourceDataset_1f5",
-						"type": "DatasetReference"
-					}
-				],
 				"outputs": [
 					{
 						"referenceName": "parquet_wikipedia_f_fr",
