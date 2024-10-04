@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_1f5",
+				"name": "Copy_flatten_wikipedia_f_fr",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
