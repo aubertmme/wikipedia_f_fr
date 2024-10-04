@@ -16,7 +16,7 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "/sparql?format=json&query=SELECT%20?item%20?itemLabel%20(COUNT%20(?has_part_s_)%20as%20?count_has_part_s_)%20(COUNT%20(?part_of)%20as%20?count_part_of)%20WHERE%20{%20?item%20wdt:P21%20wd:Q6581072;%20wdt:P1412%20wd:Q150.%20SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20\"fr\".}%20OPTIONAL%20{%20?item%20wdt:P527%20?has_part_s_.%20}%20OPTIONAL%20{%20?item%20wdt:P361%20?part_of.%20}%20}%20GROUP%20BY%20?item%20?itemLabel"
+						"value": "/sparql?format=json&query=SELECT%20%3Fitem%20%3FitemLabel%0A(COUNT%20(%3Fhas_part_s_)%20as%20%3Fcount_has_part_s_)%0A(COUNT%20(%3Fpart_of)%20as%20%3Fcount_part_of)%20%0AWHERE%20%7B%0A%20%20%3Fitem%20wdt%3AP21%20wd%3AQ6581072%3B%20%23femmes%0A%20%20%20%20wdt%3AP1412%20wd%3AQ150.%20%23francophones%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22fr%22.%7D%20%20%23wikidata%20francophone%0A%20%20OPTIONAL%20%7B%20%3Fitem%20wdt%3AP527%20%3Fhas_part_s_.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fitem%20wdt%3AP361%20%3Fpart_of.%20%7D%0A%7D%0AGROUP%20BY%20%3Fitem%20%3FitemLabel%0A"
 					},
 					{
 						"name": "Destination",
