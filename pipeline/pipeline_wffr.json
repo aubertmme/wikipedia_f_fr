@@ -54,7 +54,7 @@
 								},
 								"sink": {
 									"name": "items",
-									"type": "Byte"
+									"type": "String"
 								}
 							},
 							{
