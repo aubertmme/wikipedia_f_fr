@@ -1,0 +1,12 @@
+{
+	"name": "rest_wffr",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://query.wikidata.org/ ",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
