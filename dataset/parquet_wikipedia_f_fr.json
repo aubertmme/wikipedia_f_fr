@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "wikipedia_f_fr.parquet",
 				"folderPath": "wikipedia_f_fr",
 				"container": "blobwikipediafrf"
 			},
