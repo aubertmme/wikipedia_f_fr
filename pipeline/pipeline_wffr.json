@@ -63,7 +63,7 @@
 								},
 								"sink": {
 									"name": "itemLabel",
-									"type": "Byte"
+									"type": "String"
 								}
 							},
 							{
