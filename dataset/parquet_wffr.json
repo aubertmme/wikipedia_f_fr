@@ -2,7 +2,7 @@
 	"name": "parquet_wffr",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage_fedasiladls",
+			"referenceName": "AzureBlobStorage",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
