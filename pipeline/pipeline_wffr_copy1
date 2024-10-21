@@ -1,0 +1,110 @@
+{
+    "name": "pipeline_wffr_copy1",
+    "properties": {
+        "activities": [
+            {
+                "name": "Copy_flatten_wffr",
+                "type": "Copy",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 60,
+                    "retryIntervalInSeconds": 120,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [
+                    {
+                        "name": "Source",
+                        "value": "blobwikipediafrf/wikipedia_f_fr/"
+                    },
+                    {
+                        "name": "Destination",
+                        "value": "blobwikipediafrf/wikipedia_f_fr/"
+                    }
+                ],
+                "typeProperties": {
+                    "source": {
+                        "type": "JsonSource",
+                        "storeSettings": {
+                            "type": "AzureBlobStorageReadSettings",
+                            "recursive": true,
+                            "enablePartitionDiscovery": false
+                        },
+                        "formatSettings": {
+                            "type": "JsonReadSettings"
+                        }
+                    },
+                    "sink": {
+                        "type": "ParquetSink",
+                        "storeSettings": {
+                            "type": "AzureBlobStorageWriteSettings",
+                            "copyBehavior": "FlattenHierarchy"
+                        },
+                        "formatSettings": {
+                            "type": "ParquetWriteSettings"
+                        }
+                    },
+                    "enableStaging": false,
+                    "translator": {
+                        "type": "TabularTranslator",
+                        "mappings": [
+                            {
+                                "source": {
+                                    "path": "$['item']"
+                                },
+                                "sink": {
+                                    "name": "item",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "path": "$['itemLabel']"
+                                },
+                                "sink": {
+                                    "name": "itemLabel",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "path": "$['count_has_part_s_']"
+                                },
+                                "sink": {
+                                    "name": "count_has_part_s_",
+                                    "type": "Int16"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "path": "$['count_part_of']"
+                                },
+                                "sink": {
+                                    "name": "count_part_of",
+                                    "type": "Int16"
+                                }
+                            }
+                        ],
+                        "collectionReference": "$['results']['bindings']"
+                    }
+                },
+                "inputs": [
+                    {
+                        "referenceName": "Json2_wffr",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "parquet_wffr",
+                        "type": "DatasetReference"
+                    }
+                ]
+            }
+        ],
+        "annotations": [],
+        "lastPublishTime": "2024-10-21T08:16:44Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}
