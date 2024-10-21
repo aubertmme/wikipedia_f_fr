@@ -1,107 +1,105 @@
 {
-	"name": "pipeline_wffr",
-	"properties": {
-		"activities": [
-			{
-				"name": "Copy_flatten_wffr",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 60,
-					"retryIntervalInSeconds": 120,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [
-					{
-						"name": "Source",
-						"value": "/sparql?format=json&query=SELECT%20%3Fitem%20%3FitemLabel%0A(COUNT%20(%3Fhas_part_s_)%20as%20%3Fcount_has_part_s_)%0A(COUNT%20(%3Fpart_of)%20as%20%3Fcount_part_of)%20%0AWHERE%20%7B%0A%20%20%3Fitem%20wdt%3AP21%20wd%3AQ6581072%3B%20%23femmes%0A%20%20%20%20wdt%3AP1412%20wd%3AQ150.%20%23francophones%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22fr%22.%7D%20%20%23wikidata%20francophone%0A%20%20OPTIONAL%20%7B%20%3Fitem%20wdt%3AP527%20%3Fhas_part_s_.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fitem%20wdt%3AP361%20%3Fpart_of.%20%7D%0A%7D%0AGROUP%20BY%20%3Fitem%20%3FitemLabel%0A"
-					},
-					{
-						"name": "Destination",
-						"value": "blobwikipediafrf/wikipedia_f_fr/"
-					}
-				],
-				"typeProperties": {
-					"source": {
-						"type": "JsonSource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
-						},
-						"formatSettings": {
-							"type": "JsonReadSettings"
-						}
-					},
-					"sink": {
-						"type": "ParquetSink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings",
-							"copyBehavior": "FlattenHierarchy"
-						},
-						"formatSettings": {
-							"type": "ParquetWriteSettings"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$['results']['bindings'][0]['item']['value']"
-								},
-								"sink": {
-									"name": "item",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['results']['bindings'][0]['itemLabel']['value']"
-								},
-								"sink": {
-									"name": "itemLabel",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['results']['bindings'][0]['count_has_part_s_']['value']"
-								},
-								"sink": {
-									"name": "count_has_part_s",
-									"type": "Int16"
-								}
-							},
-							{
-								"source": {
-									"path": "$['results']['bindings'][0]['count_part_of']['value']"
-								},
-								"sink": {
-									"name": "count_part_of",
-									"type": "Int16"
-								}
-							}
-						],
-						"collectionReference": "$['head']['vars']"
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "json_wffr",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "parquet_wffr",
-						"type": "DatasetReference"
-					}
-				]
-			}
-		],
-		"annotations": []
-	}
+    "name": "pipeline_wffr",
+    "properties": {
+        "activities": [
+            {
+                "name": "Copy_wffr",
+                "type": "Copy",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 60,
+                    "retryIntervalInSeconds": 120,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [
+                    {
+                        "name": "Source",
+                        "value": "/sparql?format=json&query=SELECT%20%3Fitem%20%3FitemLabel%0A(COUNT%20(%3Fhas_part_s_)%20as%20%3Fcount_has_part_s_)%0A(COUNT%20(%3Fpart_of)%20as%20%3Fcount_part_of)%20%0AWHERE%20%7B%0A%20%20%3Fitem%20wdt%3AP21%20wd%3AQ6581072%3B%20%23femmes%0A%20%20%20%20wdt%3AP1412%20wd%3AQ150.%20%23francophones%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22fr%22.%7D%20%20%23wikidata%20francophone%0A%20%20OPTIONAL%20%7B%20%3Fitem%20wdt%3AP527%20%3Fhas_part_s_.%20%7D%0A%20%20OPTIONAL%20%7B%20%3Fitem%20wdt%3AP361%20%3Fpart_of.%20%7D%0A%7D%0AGROUP%20BY%20%3Fitem%20%3FitemLabel%0A"
+                    },
+                    {
+                        "name": "Destination",
+                        "value": "blobwikipediafrf/wikipedia_f_fr/"
+                    }
+                ],
+                "typeProperties": {
+                    "source": {
+                        "type": "JsonSource",
+                        "storeSettings": {
+                            "type": "HttpReadSettings",
+                            "requestMethod": "GET"
+                        },
+                        "formatSettings": {
+                            "type": "JsonReadSettings"
+                        }
+                    },
+                    "sink": {
+                        "type": "JsonSink",
+                        "storeSettings": {
+                            "type": "AzureBlobStorageWriteSettings",
+                            "copyBehavior": "PreserveHierarchy"
+                        },
+                        "formatSettings": {
+                            "type": "JsonWriteSettings"
+                        }
+                    },
+                    "enableStaging": false,
+                    "translator": {
+                        "type": "TabularTranslator",
+                        "mappings": [
+                            {
+                                "source": {
+                                    "path": "['item']['value']"
+                                },
+                                "sink": {
+                                    "path": "item"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "path": "['itemLabel']['value']"
+                                },
+                                "sink": {
+                                    "path": "itemLabel"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "path": "['count_has_part_s_']['value']"
+                                },
+                                "sink": {
+                                    "path": "count_has_part_s_"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "path": "['count_part_of']['value']"
+                                },
+                                "sink": {
+                                    "path": "count_part_of"
+                                }
+                            }
+                        ],
+                        "collectionReference": "$['results']['bindings']"
+                    }
+                },
+                "inputs": [
+                    {
+                        "referenceName": "json_wffr",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "Json2_wffr",
+                        "type": "DatasetReference"
+                    }
+                ]
+            }
+        ],
+        "annotations": [],
+        "lastPublishTime": "2024-10-21T08:16:44Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
 }
