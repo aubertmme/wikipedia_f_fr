@@ -1,0 +1,36 @@
+{
+    "name": "Json2_wffr",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureBlobStorage_fedasiladls",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "Json",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "fileName": "json2_wffr.json",
+                "folderPath": "wikipedia_f_fr",
+                "container": "blobwikipediafrf"
+            }
+        },
+        "schema": {
+            "type": "object",
+            "properties": {
+                "item": {
+                    "type": "string"
+                },
+                "itemLabel": {
+                    "type": "string"
+                },
+                "count_has_part_s_": {
+                    "type": "string"
+                },
+                "count_part_of": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
