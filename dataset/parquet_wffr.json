@@ -1,20 +1,22 @@
 {
-	"name": "parquet_wffr",
-	"properties": {
-		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage",
-			"type": "LinkedServiceReference"
-		},
-		"annotations": [],
-		"type": "Parquet",
-		"typeProperties": {
-			"location": {
-				"type": "AzureBlobStorageLocation",
-				"folderPath": "wikipedia_f_fr",
-				"container": "blobwikipediafrf"
-			},
-			"compressionCodec": "none"
-		},
-		"schema": []
-	}
+    "name": "parquet_wffr",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureBlobStorage_adls",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "Parquet",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "fileName": "parquet_wffr.parquet",
+                "folderPath": "wikipedia_f_fr",
+                "container": "blobwikipediafrf"
+            },
+            "compressionCodec": "none"
+        },
+        "schema": []
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
 }
