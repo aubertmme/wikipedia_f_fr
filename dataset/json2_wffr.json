@@ -1,8 +1,8 @@
 {
-    "name": "Json2_wffr",
+    "name": json2_wffr",
     "properties": {
         "linkedServiceName": {
-            "referenceName": "AzureBlobStorage_fedasiladls",
+            "referenceName": "AzureBlobStorage_adls",
             "type": "LinkedServiceReference"
         },
         "annotations": [],
