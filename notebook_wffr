@@ -1,14 +1,41 @@
+
+
+# set up and start the interactive session
+%idle_timeout 2880
+%glue_version 4.0
+%worker_type G.1X
+%number_of_workers 5
+
+import sys
+from awsglue.transforms import *
+from awsglue.utils import getResolvedOptions
+from pyspark.context import SparkContext
+from awsglue.context import GlueContext
+from awsglue.job import Job
+  
+sc = SparkContext.getOrCreate()
+glueContext = GlueContext(sc)
+spark = glueContext.spark_session
+job = Job(glueContext)
+
+# warm up
 import json 
 import requests 
 import boto3  
 from urllib.parse import urljoin
 
+# connect to S3
+s3 = boto3.client('s3')
+
+# concatenate url in order to avoid Schema error 
 base_url = 'https\:\/\/query.wikidata.org'
 path = '\/sparql\?format=json&query=SELECT \?item \?itemLabel (COUNT (\?has_part_s_) as \?count_has_part_s_) (COUNT (\?part_of) as \?count_part_of) WHERE { \?item wdt\:P21 wd\:Q6581072; wdt\:P1412 wd\:Q150. SERVICE wikibase\:label { bd:serviceParam wikibase\:language "fr".} OPTIONAL { \?item wdt:P527 \?has_part_s_. } OPTIONAL { \?item wdt:P361 \?part_of. } } GROUP BY \?item \?itemLabel'
 url = urljoin(base_url, path)
 
-s3 = boto3.client('s3', endpoint_url='s3://arn:aws:s3:eu-central-1:767828766765:accesspoint/wikiffr')
-
+# check connection to Wikidata
 response = requests.get(url)
 data = response.json()
-s3.put_object(Body=json.dumps(data), Bucket='wikipediafrf', Key='arn:aws:s3:::wikipediafrf', ContentType='application/json')
+print(len(data['results']['bindings']))
+
+# export data to S3
+s3.put_object(Body=json.dumps(data), Bucket='wikipediafrf', Key='key_wikiffr', ContentType='application/json')
