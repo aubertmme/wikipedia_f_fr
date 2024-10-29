@@ -1,0 +1,25 @@
+import sys
+from awsglue.transforms import *
+from awsglue.utils import getResolvedOptions
+from pyspark.context import SparkContext
+from awsglue.context import GlueContext
+from awsglue.job import Job
+import gs_flatten
+
+args = getResolvedOptions(sys.argv, ['JOB_NAME'])
+sc = SparkContext()
+glueContext = GlueContext(sc)
+spark = glueContext.spark_session
+job = Job(glueContext)
+job.init(args['JOB_NAME'], args)
+
+# Script generated for node JSON_wffr
+JSON_wffr_node1729603046127 = glueContext.create_dynamic_frame.from_options(format_options={"multiLine": "false"}, connection_type="s3", format="json", connection_options={"paths": ["s3://wikipediafrf/key_wikiffr"]}, transformation_ctx="JSON_wffr_node1729603046127")
+
+# Script generated for node Flatten
+Flatten_node1729603230370 = JSON_wffr_node1729603046127.gs_flatten()
+
+# Script generated for node parquet_wffr
+parquet_wffr_node1729603272673 = glueContext.write_dynamic_frame.from_options(frame=Flatten_node1729603230370, connection_type="s3", format="glueparquet", connection_options={"path": "s3://wikipediafrf", "partitionKeys": []}, format_options={"compression": "snappy"}, transformation_ctx="parquet_wffr_node1729603272673")
+
+job.commit()
