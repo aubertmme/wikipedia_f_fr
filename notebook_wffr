@@ -39,3 +39,4 @@ print(len(data['results']['bindings']))
 
 # export data to S3
 s3.put_object(Body=json.dumps(data), Bucket='wikipediafrf', Key='key_wikiffr', ContentType='application/json')
+print("ok")
