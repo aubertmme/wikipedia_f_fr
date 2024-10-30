@@ -1,0 +1,26 @@
+# warm up
+import json
+import requests
+from urllib.parse import urljoin
+
+# concatenate url in order to avoid Schema error
+base_url = 'https://query.wikidata.org'
+path = '/sparql?format=json&query=SELECT ?item ?itemLabel (COUNT (?has_part_s_) as ?count_has_part_s_) (COUNT (?part_of) as ?count_part_of) WHERE { ?item wdt:P21 wd:Q6581072; wdt:P1412 wd:Q150. SERVICE wikibase:label { bd:serviceParam wikibase:language "fr".} OPTIONAL { ?item wdt:P527 ?has_part_s_. } OPTIONAL { ?item wdt:P361 ?part_of. } } GROUP BY ?item ?itemLabel'
+url = urljoin(base_url, path)
+print(url)
+
+# connection to Wikidata
+response = requests.get(url)
+data = response.json()
+print(len(data['results']['bindings']))
+
+# export JSON data to JSON file
+with open('json_wffr.json', 'w') as fp:
+    json.dump(data, fp)
+
+# transfer JSON file to bucket
+from google.cloud import storage
+storage_client = storage.Client()
+my_bucket = storage_client.bucket('wikipedia_ffr')
+my_blob = my_bucket.blob('json2_wffr')
+my_blob.upload_from_filename('json_wffr.json')
